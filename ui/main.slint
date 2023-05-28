@@ -1,0 +1,105 @@
+import {
+    Button,
+    GridBox,
+    HorizontalBox,
+    LineEdit,
+    VerticalBox
+} from "std-widgets.slint";
+
+struct SettingsInUI {
+    table_number: string,
+    table_name: string,
+}
+
+export global Logic {
+    callback create_file_clicked(SettingsInUI);
+}
+
+component HorizontalLine inherits Rectangle {
+    border-color: white;
+    border-width: 1px;
+    height: 2px;
+}
+
+export component Main inherits Window {
+    preferred-width: 600px;
+    preferred-height: 500px;
+
+    VerticalBox {
+        HorizontalBox {
+            Text {
+                max-width: 200px;
+                vertical-alignment: center;
+                text: "Номер таблицы";
+            }
+            table_number := LineEdit {
+                horizontal-alignment: left;
+                height: 40px;
+                max-width: 200px;
+                placeholder-text: "0";
+            }
+        }
+
+        HorizontalBox {
+            Text {
+                max-width: 200px;
+                vertical-alignment: center;
+                text: "Название таблицы";
+            }
+            table_name := LineEdit {
+                horizontal-alignment: left;
+                height: 40px;
+                max-width: 200px;
+                placeholder-text: "0";
+            }
+        }
+
+        HorizontalLine {}
+
+        GridBox {
+            Row{
+                Text {
+                    width: 200px;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                    text: "Название";
+                    height: 40px;
+                }
+                Text {
+                    width: 200px;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                    text: "Тип данных";
+                }
+                Text {
+                    width: 200px;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                    text: "Размер, байт";
+                }
+            }
+            Row {
+                LineEdit {
+                    horizontal-alignment: left;
+                    max-width: 200px;
+                    placeholder-text: "0";
+                    row: 1;
+                    height: 40px;
+                }
+            }
+        }
+
+        HorizontalLine {}
+
+        Button {
+            text: "Создать файл";
+            height: 40px;
+            clicked => {
+                Logic.create_file_clicked({
+                    table_number: table_number.text,
+                    table_name: table_name.text,
+                });
+            }
+        }
+    }
+}
