@@ -1,20 +1,21 @@
+#![windows_subsystem = "windows"]
+
 use got_label_creator_v2::builder::Builder;
+use got_label_creator_v2::create_csv;
+use got_label_creator_v2::log;
 
 slint::include_modules!();
 
 fn main() {
+    log::init();
+
     let app = Main::new().unwrap();
     app.global::<Logic>().on_create_file_clicked(|settings| {
-        // let received_settings = Data {
-        //     table_number: settings.table_number.to_string(),
-        //     table_name: settings.table_name.to_string(),
-        // };
-        // test_fn1(received_settings);
         let data = Builder::new()
-            .set_table_number(String::from("1"))
-            .set_table_name(String::from("table_name"))
+            .set_table_number(settings.table_number.to_string())
+            .set_table_name(settings.table_name.to_string())
             .build();
-        println!("data: {:?}", data);
+        create_csv::create_csv(data).unwrap();
     });
     app.run().unwrap()
 }

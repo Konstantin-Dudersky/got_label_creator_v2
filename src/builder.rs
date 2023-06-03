@@ -40,7 +40,7 @@ mod test {
             .set_table_number(String::from("1"))
             .set_table_name(String::from("table_name"))
             .build();
-        assert_eq!(data.get_table_name(), "table_name");
-        assert_eq!(data.get_table_number(), "1");
+        assert_eq!(data.table_name, "table_name");
+        assert_eq!(data.table_number, "1");
     }
 }

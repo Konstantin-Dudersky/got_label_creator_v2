@@ -1,14 +1,14 @@
 #[derive(Debug)]
-struct ItemInStruct {
-    name: String,
-    data_type: String,
-    size: i8,
+struct _ItemInStruct {
+    _name: String,
+    _data_type: String,
+    _size: i8,
 }
 
 #[derive(Debug)]
 pub struct Data {
-    table_number: String,
-    table_name: String,
+    pub table_number: String,
+    pub table_name: String,
 }
 
 impl Data {
@@ -17,13 +17,5 @@ impl Data {
             table_number,
             table_name,
         }
-    }
-
-    pub fn get_table_number(&self) -> &str {
-        &self.table_number
-    }
-
-    pub fn get_table_name(&self) -> &str {
-        &self.table_name
     }
 }
