@@ -17,7 +17,7 @@ pub fn create_csv(data: domain::Data) -> Result<(), Box<dyn Error>> {
 
     for order in 0..data.amount {
         for item in &data.items {
-            let record = record_creator.create_record_for_item(&item, order);
+            let record = record_creator.create_record_for_item(item, order);
             wtr.write_record(record)?;
         }
     }
@@ -112,11 +112,7 @@ impl<'a> RecordCreator<'a> {
         record[2] = data_type;
 
         if item.data_type.contains("Bit") {
-            record[3] = format!(
-                "D{}.b{}",
-                self.word_offset.to_string(),
-                self.bit_offset
-            );
+            record[3] = format!("D{}.b{}", self.word_offset, self.bit_offset);
             self.bit_offset += item.size as u32;
         } else {
             if self.bit_offset > 0 {
@@ -131,9 +127,9 @@ impl<'a> RecordCreator<'a> {
     }
 }
 
-fn clean_string<'a>(input_str: &'a str) -> &'a str {
+fn clean_string(input_str: &str) -> &str {
     let data_type = input_str.trim();
-    let data_type = data_type.strip_suffix("\n").unwrap_or(data_type);
+    let data_type = data_type.strip_suffix('\n').unwrap_or(data_type);
     let data_type = data_type.strip_suffix("\r\n").unwrap_or(data_type);
     data_type
 }

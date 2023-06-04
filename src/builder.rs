@@ -30,13 +30,8 @@ impl<'a> Builder<'a> {
         self.amount = Some(amount);
     }
 
-    pub fn add_item<'add_item>(
-        &mut self,
-        name: &'a str,
-        data_type: &'a str,
-        size: i8,
-    ) {
-        if name.len() == 0 {
+    pub fn add_item(&mut self, name: &'a str, data_type: &'a str, size: i8) {
+        if name.is_empty() {
             return;
         }
         let new_item = domain::ItemInStruct {
