@@ -11,9 +11,7 @@ pub struct Builder<'a> {
 
 impl<'a> Builder<'a> {
     pub fn new() -> Self {
-        let mut data: Self = Default::default();
-        data.items = vec![];
-        data
+        Default::default()
     }
 
     pub fn set_table_number(&mut self, table_number: &'a str) {
@@ -70,6 +68,8 @@ mod test {
         let mut builder = Builder::new();
         builder.set_table_number("1");
         builder.set_table_name("table_name");
+        builder.set_amount(1);
+        builder.set_offset(0);
         builder.add_item("item_1", "int", 1);
 
         let data = builder.build();
