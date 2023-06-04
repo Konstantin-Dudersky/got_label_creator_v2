@@ -1,14 +1,37 @@
 import {
     Button,
+    CheckBox,
     GridBox,
     HorizontalBox,
     LineEdit,
     VerticalBox
 } from "std-widgets.slint";
 
-struct SettingsInUI {
+import {TableHeader, TableRow} from "table.slint";
+
+
+struct ItemInStruct {
+    name: string,
+    data_type: string,
+    size: int,
+    is_bit: bool,
+}
+
+export struct SettingsInUI {
     table_number: string,
     table_name: string,
+    offset: int,
+    amount: int,
+    item_0: ItemInStruct,
+    item_1: ItemInStruct,
+    item_2: ItemInStruct,
+    item_3: ItemInStruct,
+    item_4: ItemInStruct,
+    item_5: ItemInStruct,
+    item_6: ItemInStruct,
+    item_7: ItemInStruct,
+    item_8: ItemInStruct,
+    item_9: ItemInStruct,
 }
 
 export global Logic {
@@ -22,9 +45,7 @@ component HorizontalLine inherits Rectangle {
 }
 
 export component Main inherits Window {
-    preferred-width: 600px;
-    preferred-height: 500px;
-
+    title: "GOT label creator";
     VerticalBox {
         HorizontalBox {
             Text {
@@ -34,9 +55,9 @@ export component Main inherits Window {
             }
             table_number := LineEdit {
                 horizontal-alignment: left;
-                height: 40px;
+                height: 32px;
                 max-width: 200px;
-                placeholder-text: "0";
+                text: "1";
             }
         }
 
@@ -48,47 +69,57 @@ export component Main inherits Window {
             }
             table_name := LineEdit {
                 horizontal-alignment: left;
-                height: 40px;
+                height: 32px;
                 max-width: 200px;
-                placeholder-text: "0";
+                text: "AI";
+            }
+        }
+
+        HorizontalBox {
+            Text {
+                max-width: 200px;
+                vertical-alignment: center;
+                text: "Начальное смещение";
+            }
+            offset := LineEdit {
+                horizontal-alignment: left;
+                height: 32px;
+                max-width: 200px;
+                text: "0";
+            }
+        }
+
+        HorizontalBox {
+            Text {
+                max-width: 200px;
+                vertical-alignment: center;
+                text: "Кол-во структур";
+            }
+            amount := LineEdit {
+                horizontal-alignment: left;
+                height: 32px;
+                max-width: 200px;
+                text: "1";
             }
         }
 
         HorizontalLine {}
 
-        GridBox {
-            Row{
-                Text {
-                    width: 200px;
-                    horizontal-alignment: center;
-                    vertical-alignment: center;
-                    text: "Название";
-                    height: 40px;
-                }
-                Text {
-                    width: 200px;
-                    horizontal-alignment: center;
-                    vertical-alignment: center;
-                    text: "Тип данных";
-                }
-                Text {
-                    width: 200px;
-                    horizontal-alignment: center;
-                    vertical-alignment: center;
-                    text: "Размер, байт";
-                }
-            }
-            Row {
-                LineEdit {
-                    horizontal-alignment: left;
-                    max-width: 200px;
-                    placeholder-text: "0";
-                    row: 1;
-                    height: 40px;
-                }
-            }
+        VerticalBox {
+            spacing: 0px;
+            TableHeader {}
+            item0 := TableRow {}
+            item1 := TableRow {}
+            item2 := TableRow {}
+            item3 := TableRow {}
+            item4 := TableRow {}
+            item5 := TableRow {}
+            item6 := TableRow {}
+            item7 := TableRow {}
+            item8 := TableRow {}
+            item9 := TableRow {}
         }
-
+        
         HorizontalLine {}
 
         Button {
@@ -98,6 +129,58 @@ export component Main inherits Window {
                 Logic.create_file_clicked({
                     table_number: table_number.text,
                     table_name: table_name.text,
+                    offset: offset.text.to-float(),
+                    amount: amount.text.to-float(),
+                    item_0: {
+                        name: item0.name,
+                        data_type: item0.data_type,
+                        size: item0.size.to-float(),
+                    },
+                    item_1: {
+                        name: item1.name,
+                        data_type: item1.data_type,
+                        size: item1.size.to-float(),
+                    },
+                    item_2: {
+                        name: item2.name,
+                        data_type: item2.data_type,
+                        size: item2.size.to-float(),
+                    },
+                    item_3: {
+                        name: item3.name,
+                        data_type: item3.data_type,
+                        size: item3.size.to-float(),
+                    },
+                    item_4: {
+                        name: item4.name,
+                        data_type: item4.data_type,
+                        size: item4.size.to-float(),
+                    },
+                    item_5: {
+                        name: item5.name,
+                        data_type: item5.data_type,
+                        size: item5.size.to-float(),
+                    },
+                    item_6: {
+                        name: item6.name,
+                        data_type: item6.data_type,
+                        size: item6.size.to-float(),
+                    },
+                    item_7: {
+                        name: item7.name,
+                        data_type: item7.data_type,
+                        size: item7.size.to-float(),
+                    },
+                    item_8: {
+                        name: item8.name,
+                        data_type: item8.data_type,
+                        size: item8.size.to-float(),
+                    },
+                    item_9: {
+                        name: item9.name,
+                        data_type: item9.data_type,
+                        size: item9.size.to-float(),
+                    },
                 });
             }
         }

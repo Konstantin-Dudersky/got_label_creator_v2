@@ -1,0 +1,54 @@
+import {CheckBox, HorizontalBox, LineEdit} from "std-widgets.slint";
+
+export component TableHeader {
+    HorizontalBox {
+        Text {
+            width: 200px;
+            horizontal-alignment: center;
+            vertical-alignment: center;
+            text: "Название";
+            height: 40px;
+        }
+        Text {
+            width: 200px;
+            horizontal-alignment: center;
+            vertical-alignment: center;
+            text: "Тип данных";
+        }
+        Text {
+            width: 100px;
+            horizontal-alignment: center;
+            vertical-alignment: center;
+            text: "Размер";
+        }
+    }
+}
+
+export component TableRow {
+    out property <string> name <=> name.text;
+    out property <string> data_type <=> data_type.text;
+    out property <string> size <=> size.text;
+
+    HorizontalBox {
+        alignment: stretch;
+
+        name := LineEdit {
+            horizontal-alignment: left;
+            width: 200px;
+            placeholder-text: "item 1";
+            height: 32px;
+        }
+        data_type := LineEdit {
+            horizontal-alignment: left;
+            width: 200px;
+            placeholder-text: "";
+            height: 32px;
+        }
+        size := LineEdit {
+            horizontal-alignment: left;
+            width: 100px;
+            placeholder-text: "";
+            height: 32px;
+        }
+    }
+}
