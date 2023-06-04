@@ -2,13 +2,10 @@
 
 use got_label_creator_v2::builder::Builder;
 use got_label_creator_v2::create_csv;
-use got_label_creator_v2::log;
 
 slint::include_modules!();
 
 fn main() {
-    log::init();
-
     let app = Main::new().unwrap();
     app.global::<Logic>().on_create_file_clicked(|settings| {
         let mut data_builder = Builder::new();

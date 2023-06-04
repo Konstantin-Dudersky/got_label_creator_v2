@@ -1,7 +1,5 @@
 use std::error::Error;
 
-use tracing;
-
 use crate::domain;
 
 const FILE: &str = "export.csv";
@@ -25,8 +23,6 @@ pub fn create_csv(data: domain::Data) -> Result<(), Box<dyn Error>> {
     }
 
     wtr.flush()?;
-
-    tracing::info!("file created");
 
     Ok(())
 }

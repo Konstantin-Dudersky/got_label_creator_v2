@@ -25,6 +25,7 @@ export component TableHeader {
 }
 
 export component TableRow {
+    in property <int> order;
     out property <string> name <=> name.text;
     out property <string> data_type <=> data_type.text;
     out property <string> size <=> size.text;
@@ -35,7 +36,7 @@ export component TableRow {
         name := LineEdit {
             horizontal-alignment: left;
             width: 200px;
-            placeholder-text: "item 1";
+            placeholder-text: "item " + order;
             height: 32px;
         }
         data_type := LineEdit {
